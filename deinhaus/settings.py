@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-0r_r=@+^+ngn3@3$%14*u+2%yde!wkqj@k23&$bwz#0b3$@xea
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.213','127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Celery Configuration
@@ -165,8 +165,7 @@ REST_FRAMEWORK = {
 AUTH_USER_MODEL = 'users.CustomUser'
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-    'http://192.168.0.198'
+    'http://localhost:3000'
 ]
 ASGI_APPLICATION = 'deinhaus.asgi.application'
 CHANNEL_LAYERS = {
