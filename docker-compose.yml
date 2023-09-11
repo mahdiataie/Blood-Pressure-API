@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  django:
+    build:
+      context: ./backend
+    container_name: djangoapi_c
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+
+  redis:
+    image: "redis:latest"
+
+  # db:
+  # image: mysql:latest
+  # environment:
+  #   MYSQL_ROOT_PASSWORD: Mahdi1996
+  #   MYSQL_DATABASE: thesis
+  #   MYSQL_USER: root
+  #   MYSQL_PASSWORD: Mahdi1996
+  db:
+    image: "postgres:latest"
+
+  react:
+    build:
+      context: ./dashboard
+    container_name: react_c
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./dashboard:/app
+      - ./dashboard:/app/node_modules
