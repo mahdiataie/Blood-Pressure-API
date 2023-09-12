@@ -50,29 +50,22 @@ class LatestMeasuresAPIView(APIView):
                 queryset = queryset.filter(timestamp__date=date)
 
             measures = queryset[:50]
-            # response_data = []
-            # for measure in measures:
-            #     measure_type = measure.measuretype_withings.measuretype
-            #     value = float(measure.value) * 10 ** int(measure.unit)
-            #     description = measure.measuretype_withings.description
-            #     response_data.append({
-            #         'id': measure.id,
-            #         'measure_type': measure_type,
-            #         'description': description,
-            #         'value': value,
-            #         'timestamp': measure.timestamp,
-            #         'houseid': measure.uuid
-            #     })
-              # Serialize the queryset using the serializer
-            serializer = latestWithingsMeasureSerializer(measures, many=True)
-            
-            return Response(serializer.data)
+            response_data = []
+            for measure in measures:
+                measure_type = measure.measuretype_withings.measuretype
+                value = float(measure.value) * 10 ** int(measure.unit)
+                description = measure.measuretype_withings.description
+                response_data.append({
+                    'id': measure.id,
+                    'measure_type': measure_type,
+                    'description': description,
+                    'value': value,
+                    'timestamp': measure.timestamp,
+                    'houseid': measure.uuid
+                })
+            return Response(response_data)
 
         return Response({'error': 'Authentication credentials were not provided.'}, status=401)
-
-        #     return Response(response_data)
-
-        # return Response({'error': 'Authentication credentials were not provided.'}, status=401)
 
 
 class MeasurementCountAPIView(APIView):

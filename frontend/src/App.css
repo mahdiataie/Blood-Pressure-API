@@ -1,0 +1,14 @@
+:root {
+  --light-color: #fff;
+  --primary-color: #69a6a0;
+  --secondary-color: #8AB3CD;
+  --orange-color: #F8BB89;
+  --purple-color: #A38CAB;
+}
+
+* {
+  font-family: 'Montserrat', sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}

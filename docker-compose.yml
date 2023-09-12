@@ -9,28 +9,29 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - db
       - redis
+    environment:
+      - DJANGO_SECRET_KEY=your-secret-key
+      - DEBUG=True
+      - DJANGO_DB_HOST=db
+      - DJANGO_DB_PORT=3306
+      - DJANGO_DB_NAME=thesis
+      - DJANGO_DB_USER=root
+      - DJANGO_DB_PASSWORD=
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
 
   redis:
-    image: "redis:latest"
-
-  # db:
-  # image: mysql:latest
-  # environment:
-  #   MYSQL_ROOT_PASSWORD: Mahdi1996
-  #   MYSQL_DATABASE: thesis
-  #   MYSQL_USER: root
-  #   MYSQL_PASSWORD: Mahdi1996
-  db:
-    image: "postgres:latest"
+    image: redis:latest
+    ports:
+      - "6379:6379"
 
   react:
     build:
-      context: ./dashboard
-    container_name: react_c
+      context: ./frontend
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     volumes:
-      - ./dashboard:/app
+      - ./frontend:/app
       - ./dashboard:/app/node_modules
